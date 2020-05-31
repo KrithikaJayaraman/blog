@@ -1,0 +1,743 @@
+<!doctype html>
+
+<html lang="en-us">
+
+<head>
+  <title>Welcome to my journal!</title>
+  <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Welcome to my journal!" />
+<meta name="author" content="Krithika Jayaraman" /><meta property="og:title" content="Quick peek about torch.tensor" />
+<meta property="og:description" content="Introduction to Pytorch Welcome to the first blog in the series Hands-On Pytorch Day 1. Recently I happened to attend a series of web tutorials on &ldquo;Pytorch: Zero to GANs&rdquo; presented by Jovian ML." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/blog/posts/day1.html" />
+<meta property="article:published_time" content="2020-05-30T21:27:44-07:00" />
+<meta property="article:modified_time" content="2020-05-30T21:27:44-07:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Quick peek about torch.tensor"/>
+<meta name="twitter:description" content="Introduction to Pytorch Welcome to the first blog in the series Hands-On Pytorch Day 1. Recently I happened to attend a series of web tutorials on &ldquo;Pytorch: Zero to GANs&rdquo; presented by Jovian ML."/>
+
+<meta name="generator" content="Hugo 0.71.1" />
+    
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="http://localhost:1313/blog/fontawesome/css/all.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  <link rel="stylesheet" type="text/css" href="../css/styles.css" /></head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="../">Welcome to my journal!</a>
+            </h1>
+
+      <ul id="social-media">
+             <li>
+               <a href="https://github.com/KrithikaJayaraman" title="GitHub">
+               <i class="fab fa-github fa-lg"></i>
+               </a>
+             </li>
+             <li>
+               <a href="https://twitter.com/@KrithiJay" title="Twitter">
+               <i class="fab fa-twitter fa-lg"></i>
+               </a>
+             </li>
+             <li>
+               <a href="https://linkedin.com/in/krithika-jayaraman" title="LinkedIn">
+               <i class="fab fa-linkedin fa-lg"></i>
+               </a>
+             </li>
+      </ul>
+      
+      <p><em>It&rsquo;s me Krithika</em></p>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+        <li>
+            <a class="" href="../about.html">
+                <i class="fa-li fa  fa-lg"></i><span>About me</span>
+            </a>
+        </li>
+        
+    </ul>
+</nav>
+
+
+    <main>
+
+
+
+
+<article>
+
+    <h1>Quick peek about torch.tensor</h1>
+
+    
+      <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2020-05-30T21:27:44-07:00">May 30, 2020</time>
+        </li>
+        
+
+        
+
+        <li>14 minutes read</li>
+    </ul>
+</aside>
+
+    
+
+    
+<div class="featured_image">
+    <a href="http://localhost:1313/blog/posts/day1.html" title="Quick peek about torch.tensor">
+        <img src="">
+    </a>
+</div>
+
+
+
+    <h2 id="introduction-to-pytorch">Introduction to Pytorch</h2>
+<p>Welcome to the first blog in the series Hands-On Pytorch Day 1. Recently I happened to attend a series of web tutorials on &ldquo;<strong>Pytorch: Zero to GANs</strong>&rdquo; presented by <a href="https://www.jovian.ml/">Jovian ML</a>. This series is a compilation of the lessons learnt from the course.</p>
+<p>This tutorial will show some of the basic tensor functions in Pytorch. The intent of this blog is to get a feel of how programming in Pytorch looks like. I strongly recommend readers to experiment with the other cool functions available on the official Pytoch page. I assume that you are familiar with basic matrix operations and linear algebra.</p>
+<p>Pytorch is an opensource Machine Learning Library developed by Facebook for Machine Learing, Natural Language Processing and Computer Vision applications.</p>
+<p>Let&rsquo;s get hands on some of the basic operations in Pytorch.</p>
+<p>Some of the functions that we are experimenting with are</p>
+<ul>
+<li>torch.randn()</li>
+<li>torch.mm()</li>
+<li>torch.clamp()</li>
+<li>torch.clone()</li>
+<li>torch.where()</li>
+</ul>
+<p><strong>Note</strong>: It is assumed that you have Anaconda installed along with all the eseential python libraries such as pandas, numpy, matplotlib, etc.</p>
+<p>Before diving into the functions, what is a <strong>tensor</strong>?</p>
+<p>A tensor is a data structure which can possibly represent a multi-dimensional object. A 0-D tensor is a scalar, a 1D tensor is a vector, a 2-D tensor is a matrix and so on. At it&rsquo;s core, it&rsquo;s a container for storing an object.</p>
+<p><em>Source: Deep Learning with Python by Francois Chollet</em></p>
+<h4 id="install-torch"><strong>Install torch</strong></h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Import torch and other required modules</span>
+<span style="color:#f92672">import</span> torch
+</code></pre></div><p>Before trying the functions, let&rsquo;s build a couple of tensors.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">x <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>tensor([<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>])
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Number of elements in the tensor: &#39;</span>,x<span style="color:#f92672">.</span>shape)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Dimensionality of the tensor: &#39;</span>,x<span style="color:#f92672">.</span>ndim)
+</code></pre></div><pre><code>Number of elements in the tensor:  torch.Size([4])  
+Dimensionality of the tensor:  1
+</code></pre><p>In the above example, we have created a one dimensional tensor of size 4. Dimensionality of a tensor here can be thought of the number of axes contained in it.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># tensor from numpy array</span>
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+y <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>tensor(np<span style="color:#f92672">.</span>array([[[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>],
+                           [<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>],
+                           [<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>]],
+                          [[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>],
+                           [<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>],
+                           [<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>]],
+                          [[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>],
+                           [<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>],
+                           [<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>]]]))
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Number of elements in the tensor: &#39;</span>,y<span style="color:#f92672">.</span>shape)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Dimensionality of the tensor: &#39;</span>,y<span style="color:#f92672">.</span>ndim)
+</code></pre></div><pre><code>Number of elements in the tensor:  torch.Size([3, 3, 4])  
+Dimensionality of the tensor:  3
+</code></pre><p>In this example, we have 3 axes. Assume this as four 3x3 plates stacked behind one another.</p>
+<p>In machine learning and deep learning applications, computing gradients is an essential part of model building and performance tuning process. Pytorch offers a smooth way of setting gradients for specific variables along the model pipeline during the initialization process using the parameter <strong>requires_grad = True</strong>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#tensor of zeros and ones (typically used in deep learning applications for initializing)</span>
+a <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>ones([<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>], dtype <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>float32, requires_grad <span style="color:#f92672">=</span> True)
+b <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>zeros([<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>], dtype <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>int32)
+
+<span style="color:#66d9ef">print</span>(a)
+<span style="color:#66d9ef">print</span>(b)
+</code></pre></div><pre><code>tensor([[1., 1., 1.],
+        [1., 1., 1.],
+        [1., 1., 1.]], requires_grad=True)
+tensor([[0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]], dtype=torch.int32)
+</code></pre><p>The next example shows how to create a diagonal matrix using pytorch.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># to create a 2D diagonal matrix with 1s on the diagonal</span>
+<span style="color:#75715e"># Function: torch.eye()</span>
+c <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>eye(<span style="color:#ae81ff">5</span>)
+c
+</code></pre></div><pre><code>tensor([[1., 0., 0., 0., 0.],
+        [0., 1., 0., 0., 0.],
+        [0., 0., 1., 0., 0.],
+        [0., 0., 0., 1., 0.],
+        [0., 0., 0., 0., 1.]])
+</code></pre><p>As part of this exercise, we are also interested in exploring the incorrect usages for better understanding.</p>
+<p>What happens if you give requires_grad = True for an integer tensor? Let&rsquo;s check it out.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># What happens if you give requires_grad = True for an integer tensor?</span>
+
+b <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>ones([<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>], dtype <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>int32, requires_grad <span style="color:#f92672">=</span> True)
+</code></pre></div><pre><code>---------------------------------------------------------------------------
+RuntimeError                              Traceback (most recent call last)
+&lt;ipython-input-5-87f5b3b3c77a&gt; in &lt;module&gt;
+      1 # What happens if you give requires_grad = True for an integer tensor?
+      2 
+----&gt; 3 b = torch.ones([2,2], dtype = torch.int32, requires_grad = True)
+
+RuntimeError: Only Tensors of floating point dtype can require gradients
+</code></pre><p>So we have seen what tensors are, how to create them with and without requires_grad = True.</p>
+<p>Note that requires_grad is very handy for applications which require the gradient to be calculated. This can be set only for <strong>floating point</strong> tensors.</p>
+<h3 id="function-1---torchrandn-and-torchrandom">Function 1 - torch.randn() and torch.random()</h3>
+<p>Creating random variables is a vital part of any simulation or experimental study. In this section, we&rsquo;ll see how to create a random tensor that contains elements from a gaussian distribution with mean 0 and sd 1.</p>
+<p><em>Function used: torch.randn() torch.randn(size, out=None, dtype=None, layout=torch.strided, device=None, requires_grad=False) → Tensor</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Examples</span>
+
+<span style="color:#75715e"># Create a random 3x3 tensor</span>
+w1 <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>randn([<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>], dtype <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>float32, requires_grad <span style="color:#f92672">=</span> True)
+<span style="color:#66d9ef">print</span>(w1)
+
+
+<span style="color:#75715e"># Create 2x2x2 tensor</span>
+w2 <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>randn(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>)
+w2
+</code></pre></div><pre><code>tensor([[-1.1417,  1.1747,  1.6421],
+        [ 2.8420,  0.1834,  0.6659],
+        [ 0.8705, -0.3425, -0.1288]], requires_grad=True)
+tensor([[[-1.0682,  0.9346],
+         [ 0.9322, -0.3019]],
+
+        [[-0.6145, -1.5761],
+         [-0.2364, -0.2791]]])
+</code></pre><p>When does this code break?</p>
+<p>Here since normal distribution is a continuous distribution, the dtype has to be float variants i.e. cannot be integer. However, there&rsquo;s still a workaround. :)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Create a random 3x3 tensor</span>
+w0 <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>randn([<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>], dtype <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>int)
+<span style="color:#66d9ef">print</span>(w0)
+
+</code></pre></div><pre><code>---------------------------------------------------------------------------
+RuntimeError                              Traceback (most recent call last)
+&lt;ipython-input-7-ddcc20dd66f7&gt; in &lt;module&gt;
+      1 # Create a random 3x3 tensor
+----&gt; 2 w0 = torch.randn([3,3], dtype = torch.int)
+      3 print(w0)
+      4 
+
+RuntimeError: &quot;norma_cpu&quot; not implemented for 'Int'
+</code></pre><p><strong>Workaround</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Workaround</span>
+w0 <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>randn([<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>])<span style="color:#f92672">.</span>type(torch<span style="color:#f92672">.</span>int32)
+<span style="color:#66d9ef">print</span>(w0)
+</code></pre></div><pre><code>tensor([[ 0,  0,  0],
+        [ 0,  0,  0],
+        [-1,  0,  1]], dtype=torch.int32)
+</code></pre><p>Alright! What if we want to define the mean and sd of the normal distribution and then generate random variables?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># use torch.random()</span>
+<span style="color:#75715e"># torch.normal(mean=0.0, std, out=None) → Tensor</span>
+
+w3 <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>normal(mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>, std <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, size <span style="color:#f92672">=</span> (<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>))
+w3
+</code></pre></div><pre><code>tensor([[ 5.0884,  6.4196],
+        [11.6668,  2.9319]])
+</code></pre><p>One interesting finding here is that for torch.normal, it is possible to specify type and generate integer random variables.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+w4 <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>normal(mean <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>, std <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>, size <span style="color:#f92672">=</span> (<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>))<span style="color:#f92672">.</span>type(torch<span style="color:#f92672">.</span>int32)
+w4
+</code></pre></div><pre><code>tensor([[6, 4],
+        [5, 2]], dtype=torch.int32)
+</code></pre><p>Thus, this is one of the interesting functions that is mostly likely used while modelling. It is also possible to generate random variables from other distributions such as exponential using appropriate functions like torch.exponential() and so on for other distributions.</p>
+<h3 id="function-2---torchmm">Function 2 - torch.mm()</h3>
+<p>torch.mm() is used for matrix multiplication. It&rsquo;s like a sibling to the popular numpy.dot() or numpy.matmul() functions.</p>
+<pre><code class="language-python#" data-lang="python#"># set the seed to return the same random numbers 
+torch.manual_seed(123)
+
+# Two random matrices
+x = torch.normal(mean = 5, std = 1, size = (5,3)).type(torch.int32)
+w = torch.normal(mean = 2, std = 2,size =(3,2)).type(torch.int32)
+
+print(x,w)
+torch.mm(x,w)
+</code></pre><pre><code>tensor([[4, 5, 4],
+        [4, 3, 5],
+        [4, 4, 5],
+        [4, 5, 4],
+        [5, 5, 5]], dtype=torch.int32) tensor([[3, 1],
+        [0, 1],
+        [1, 1]], dtype=torch.int32)
+tensor([[16, 13],
+        [17, 12],
+        [17, 13],
+        [16, 13],
+        [20, 15]], dtype=torch.int32)
+</code></pre><p>In the above example, x has dimensions 5x3 and w has dimensions 3x5.The torch.mm function performs matrix multiplication of the two tensors.</p>
+<p><strong>What happens if we swap x and w in torch.mm()?</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">torch<span style="color:#f92672">.</span>mm(w,x)
+</code></pre></div><pre><code>---------------------------------------------------------------------------
+RuntimeError                              Traceback (most recent call last)
+&lt;ipython-input-26-ae41eb236150&gt; in &lt;module&gt;
+----&gt; 1 torch.mm(w,x)
+
+RuntimeError: size mismatch, m1: [3 x 2], m2: [5 x 3] at /opt/conda/conda-bld/pytorch_1587428266983/work/aten/src/TH/generic/THTensorMath.cpp:41
+</code></pre><p>According to the rules of linear algebra, for matrix multiplication, the number of columns on the first matrix should match the number of rows of the second matrix. Hence caution should be exercised while specifying the dimensions for this operation.</p>
+<p>Alright! Let&rsquo;s consider another example as shown below.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">x <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>randn(<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">3</span>)
+w <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>randn(<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">3</span>, requires_grad <span style="color:#f92672">=</span> True)
+<span style="color:#66d9ef">print</span>(x)
+<span style="color:#66d9ef">print</span>(w)
+</code></pre></div><pre><code>tensor([[-1.9013, -0.9295,  0.5329],
+        [-1.1307,  0.1024,  2.5200],
+        [-1.2324, -0.8294,  0.4342],
+        [-0.7374,  0.1591, -1.3560],
+        [ 0.5513,  0.3732,  1.4246]])
+tensor([[ 1.2968,  0.6833,  0.2154],
+        [ 0.3307, -1.6896, -1.0063],
+        [ 0.4166, -1.1895,  0.1669],
+        [-1.2620,  0.1699,  1.1698],
+        [-0.0621, -1.4270,  1.9431],
+        [ 0.2169, -0.1464, -0.4490],
+        [-1.8926,  0.6000,  0.3799],
+        [-1.8057,  2.9590,  0.8171],
+        [ 2.5932, -2.0855, -0.8742],
+        [-1.3153, -0.7055, -0.3350]], requires_grad=True)
+</code></pre><p>Assuming this is the case in a deep learning application, how do we perform matrix multiplication? Here, we are going to try torch.t() on w matrix.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Example using torch.t()</span>
+
+torch<span style="color:#f92672">.</span>mm(x, torch<span style="color:#f92672">.</span>t(w))
+</code></pre></div><pre><code>tensor([[-2.9861,  0.4054,  0.4025,  2.8649,  2.4799, -0.5157,  3.2432,  1.1182,
+         -3.4580,  2.9781],
+        [-0.8537, -3.0829, -0.1722,  4.3922,  4.8206, -1.3918,  3.1590,  4.4039,
+         -5.3487,  0.5708],
+        [-2.0714,  0.5568,  0.5456,  1.9222,  2.1037, -0.3409,  1.9998,  0.1260,
+         -1.8458,  2.0607],
+        [-1.1396,  0.8519, -0.7228, -0.6287, -2.8160,  0.4256,  0.9758,  0.6943,
+         -1.0587,  1.3119],
+        [ 1.2767, -1.8819,  0.0235,  1.0343,  2.2013, -0.5747, -0.2781,  1.2730,
+         -0.5941, -1.4657]], grad_fn=&lt;MmBackward&gt;)
+</code></pre><p>The transpose function is nested inside torch.mm() to swap the dimensions of w in order to apply matrix multiplication.</p>
+<p>Thus, matrix multiplication is one of the important data manipulations in deep learning. We have also taken a glimpse of the transpose function which goes hand in hand with this operation.</p>
+<h3 id="function-3---torchclamp">Function 3 - torch.clamp()</h3>
+<p>torch.clamp() is used to bind the random variables within a range. Although I&rsquo;m not able to think of a real-time use case, I still think it&rsquo;s an interesting function.</p>
+<p><em>Function: torch.clamp()</em><br>
+<em>torch.clamp(input, min, max, out=None) → Tensor</em></p>
+<p>Consider a scenario where we generate random numbers using randperm().</p>
+<p><strong>Usage:</strong> <em>torch.randperm(n, out=None, dtype=torch.int64, layout=torch.strided, device=None, requires_grad=False) → LongTensor</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Example using randperm()</span>
+<span style="color:#75715e">#</span>
+
+x <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>randperm(<span style="color:#ae81ff">10</span>)
+
+x
+</code></pre></div><pre><code>tensor([0, 9, 1, 4, 3, 8, 5, 6, 7, 2])
+</code></pre><p>The above function has generated integer values from 0 to the value 10 (specified as parameter).</p>
+<p>Now, assume I changed my mind and I want the lower limit of x to be 4 and upper limit to be 8. We could achieve this using torch.clamp().</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Example using torch.clamp()</span>
+
+torch<span style="color:#f92672">.</span>clamp(x, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>)
+</code></pre></div><pre><code>tensor([5, 4, 7, 4, 4, 4, 4, 6, 8, 8])
+</code></pre><p>Let&rsquo;s check if we would be able to bind this with floating point values.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">torch<span style="color:#f92672">.</span>clamp(x, min <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.2</span>, max <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>)
+</code></pre></div><pre><code>tensor([0, 1, 1, 1, 1, 1, 1, 1, 1, 1])
+</code></pre><p>Thus, I believe torch.clamp() can be used in statistical analyses to bind variables within a range. For instance, if we want a variable such as &lsquo;number of defects&rsquo; to be positive only and perhaps if we had negative values in the actual data, we could clamp it to have a minimum of 0. It would be a good pre-processing step.</p>
+<h3 id="function-4---torchclone">Function 4 - torch.clone()</h3>
+<p>torch.clone() creates a copy of a sensor. The interesting fact about cloning is that the properties of the original tensor doesn&rsquo;t get copied. Only the values get linked. Also, while computing gradient, the copied tensor doesn&rsquo;t get the gradient. Instead, the original tensor takes the gradient even while it is not used in the backward pass.</p>
+<p>Let&rsquo;s check out an example.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">x <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>tensor(np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>], [<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>]]))
+
+y <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>clone(x)
+
+y
+</code></pre></div><pre><code>tensor([[1, 1, 1],
+        [2, 2, 2]])
+</code></pre><p>Here, y is a clone of the tensor x. Suppose you add a scalar to y. Let&rsquo;s see what happens to x. We will be using torch.add().</p>
+<p><em>Function: torch.add()</em><br>
+<em>Purpose: to add a scalar to each element in a tensor</em><br>
+<em>torch.add(input, other, out=None)</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">y <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>add(y,<span style="color:#ae81ff">10</span> )
+y
+</code></pre></div><pre><code>tensor([[11, 11, 11],
+        [12, 12, 12]])
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># What&#39;s in x</span>
+x
+</code></pre></div><pre><code>tensor([[1, 1, 1],
+        [2, 2, 2]])
+</code></pre><p>Now let&rsquo;s try simple linear model and apply torch.clone(). Consider a tensor X of size 5x3. Assume it has 5 samples and 3 features x1, x2, x3.</p>
+<p>The weight matrix is of dimensions (no. of hidden units, number of input features). Let the number of hidden units be 5.</p>
+<p>Let&rsquo;s assume bias to be zero for this example.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">torch<span style="color:#f92672">.</span>manual_seed(<span style="color:#ae81ff">123</span>)
+X <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>randn(<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">3</span>)<span style="color:#f92672">.</span>type(torch<span style="color:#f92672">.</span>FloatTensor)
+y <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>randn(<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">5</span>)<span style="color:#f92672">.</span>type(torch<span style="color:#f92672">.</span>float)
+
+<span style="color:#75715e"># Assume a tensor &#39;a&#39;</span>
+a <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>randn(<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">3</span>, requires_grad <span style="color:#f92672">=</span> True)
+
+
+<span style="color:#75715e"># Clone &#39;a&#39; to &#39;w&#39;</span>
+w <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>clone(a)
+
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Input X:&#39;</span>, X)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Output y: &#39;</span>, y)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Tensor a:&#39;</span>, a)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Cloned tensor w: &#39;</span>, w)
+</code></pre></div><pre><code>Input X: tensor([[-0.1115,  0.1204, -0.3696],
+        [-0.2404, -1.1969,  0.2093],
+        [-0.9724, -0.7550,  0.3239],
+        [-0.1085,  0.2103, -0.3908],
+        [ 0.2350,  0.6653,  0.3528]])
+Output y:  tensor([[-1.3250,  0.1784, -2.1338,  1.0524, -0.3885],
+        [-0.9343, -0.4991, -1.0867,  0.8805, -2.2685],
+        [-0.9133, -0.4204,  1.3111, -0.2199,  0.2190],
+        [ 0.2045,  0.5146, -0.2876,  0.8218,  0.1512],
+        [ 0.1036, -2.1996, -0.0885, -0.5612,  0.6716]])
+Tensor a: tensor([[ 0.9728,  0.0695, -0.4283],
+        [ 1.5573,  1.0076,  0.8467],
+        [ 1.1068, -0.8800,  0.0642],
+        [-0.3424,  0.2524,  0.2091],
+        [-1.9297, -0.2152, -0.5500]], requires_grad=True)
+Cloned tensor w:  tensor([[ 0.9728,  0.0695, -0.4283],
+        [ 1.5573,  1.0076,  0.8467],
+        [ 1.1068, -0.8800,  0.0642],
+        [-0.3424,  0.2524,  0.2091],
+        [-1.9297, -0.2152, -0.5500]], grad_fn=&lt;CloneBackward&gt;)
+</code></pre><p>Define the model. Note that tensor &lsquo;w&rsquo; is only used here. Not tensor &lsquo;a&rsquo;.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">learning_rate <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.001</span>  <span style="color:#75715e">#Assumed for gradient descent</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">model</span>(X, w):
+    <span style="color:#66d9ef">return</span> torch<span style="color:#f92672">.</span>matmul(X, torch<span style="color:#f92672">.</span>t(w))  
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Generate predictions</span>
+y_pred <span style="color:#f92672">=</span> model(X, w)
+
+<span style="color:#75715e"># Compute loss</span>
+<span style="color:#75715e"># Use torch.pow() to compute square</span>
+<span style="color:#75715e"># torch.pow(input, exponent, out=None) → Tensor</span>
+loss <span style="color:#f92672">=</span> (y_pred <span style="color:#f92672">-</span> y)<span style="color:#f92672">.</span>pow(<span style="color:#ae81ff">2</span>)<span style="color:#f92672">.</span>mean()
+
+
+<span style="color:#75715e"># Compute loss.backward()</span>
+loss<span style="color:#f92672">.</span>backward()
+</code></pre></div><p>Let&rsquo;s find out the gradient info in w.grad.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">w<span style="color:#f92672">.</span>grad  
+</code></pre></div><pre><code></code></pre><p>w has no gradient calculated. Alright! Does &lsquo;a&rsquo; have gradient?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#a.grad.zero_()</span>
+a<span style="color:#f92672">.</span>grad
+</code></pre></div><pre><code>tensor([[ -0.0897,  -0.6196,  -0.8324],
+        [  5.4647,   8.7851,   2.1213],
+        [  1.8918,  -1.7979,  -1.8208],
+        [  0.4244,   2.2437,   1.7663],
+        [ -5.4859, -11.0232,   0.4795]])
+</code></pre><p>The gradient computation has got reflected in &lsquo;a&rsquo;.</p>
+<p>Why? &lsquo;w&rsquo; is a copy of &lsquo;a&rsquo; and it doesn&rsquo;t get the &lsquo;requires_grad = True&rsquo; setting while getting cloned. However, it acts as a reference here and the original input gets the gradient through the cloned tensor.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Flushing the gradients of a</span>
+a<span style="color:#f92672">.</span>grad<span style="color:#f92672">.</span>zero_()
+</code></pre></div><p>Thus we have seen an interesting application of torch.clone() to copy tensor elements.</p>
+<h3 id="function-5---torchwhere">Function 5 - torch.where()</h3>
+<p>What kind of an experiment could ever skip a filter operation!! Well. That&rsquo;s what torch.where() is for.</p>
+<p><em>Function: torch.where()</em><br>
+<em>torch.where(condition, x, y) → Tensor</em></p>
+<p>The shape of the output tensor is a broadcasted shape of the inputs.</p>
+<p>Let&rsquo;s see an example.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Example 1 </span>
+
+t1 <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>normal(mean <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, std <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>, size <span style="color:#f92672">=</span> (<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>))<span style="color:#f92672">.</span>type(torch<span style="color:#f92672">.</span>int)
+
+t2 <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>eye(<span style="color:#ae81ff">3</span>)<span style="color:#f92672">.</span>type(torch<span style="color:#f92672">.</span>int)
+
+<span style="color:#66d9ef">print</span>(t1)
+
+<span style="color:#66d9ef">print</span>(t2)
+</code></pre></div><pre><code>tensor([[-2, -3,  0],
+        [-1, -1, -2],
+        [ 8, -2,  3]], dtype=torch.int32)
+tensor([[1, 0, 0],
+        [0, 1, 0],
+        [0, 0, 1]], dtype=torch.int32)
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">torch<span style="color:#f92672">.</span>where(t1<span style="color:#f92672">//</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>, t1, t2)
+</code></pre></div><pre><code>tensor([[1, 0, 0],
+        [0, 1, 0],
+        [8, 0, 3]], dtype=torch.int32)
+</code></pre><p>In the above example, t1 and t2 are two tensors with elements of type &lsquo;int&rsquo;. torch.where() checks if the floor division of t1 by 2 is positive. This happens element-wise. If result is positive, element from t1 is returned in the output, else corresponding element from t2 is returned.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Example 2 </span>
+t3 <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>normal(mean <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, std <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>, size <span style="color:#f92672">=</span> (<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>))<span style="color:#f92672">.</span>type(torch<span style="color:#f92672">.</span>float)
+
+t4 <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>normal(mean <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, std <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>, size <span style="color:#f92672">=</span> ( <span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>))<span style="color:#f92672">.</span>type(torch<span style="color:#f92672">.</span>float)
+
+<span style="color:#66d9ef">print</span>(t3)
+
+<span style="color:#66d9ef">print</span>(t4)
+</code></pre></div><pre><code>tensor([[ 4.3571,  4.4551],
+        [-1.8060,  9.0302],
+        [-4.6036, -3.9113]])
+tensor([[-5.4105,  0.8493],
+        [-4.1164, -4.1277],
+        [-1.6697,  0.4742]])
+
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">torch<span style="color:#f92672">.</span>where((t3<span style="color:#f92672">+</span>t4) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>, (t3<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>), t4)
+</code></pre></div><pre><code>tensor([[ 6.3571,  0.8493],
+        [ 0.1940, -4.1277],
+        [-2.6036, -1.9113]])
+</code></pre><p>Here torch.where() operates upon two integer tensors on the condition (t3+t4) &lt; 0. If this is true, it adds 2 to the element of tensor t3, else gives element from t4.</p>
+<p>What happens if the tensors are of different dimensions?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Example 3 </span>
+
+t5 <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>normal(mean <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, std <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>, size <span style="color:#f92672">=</span> (<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>))<span style="color:#f92672">.</span>type(torch<span style="color:#f92672">.</span>int)
+
+t6 <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>normal(mean <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, std <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>, size <span style="color:#f92672">=</span> (<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>))<span style="color:#f92672">.</span>type(torch<span style="color:#f92672">.</span>int)
+
+<span style="color:#66d9ef">print</span>(t5)
+
+<span style="color:#66d9ef">print</span>(t6)
+
+
+torch<span style="color:#f92672">.</span>where((t5<span style="color:#f92672">==</span>t6), <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>)
+</code></pre></div><pre><code>tensor([[[ 1],
+         [-1]],
+
+        [[ 4],
+         [ 0]],
+
+        [[-4],
+         [ 9]]], dtype=torch.int32)
+tensor([[ 4, -5],
+        [-9, -1],
+        [-2, -2]], dtype=torch.int32)
+---------------------------------------------------------------------------
+RuntimeError                              Traceback (most recent call last)
+&lt;ipython-input-82-f239ad21f8a3&gt; in &lt;module&gt;
+     10 
+     11 
+---&gt; 12 torch.where((t5==t6), 1, 0)
+
+/srv/conda/envs/notebook/lib/python3.7/site-packages/torch/tensor.py in wrapped(*args, **kwargs)
+     26     def wrapped(*args, **kwargs):
+     27         try:
+---&gt; 28             return f(*args, **kwargs)
+     29         except TypeError:
+     30             return NotImplemented
+
+RuntimeError: The size of tensor a (2) must match the size of tensor b (3) at non-singleton dimension 1
+</code></pre><p>The above example fails since the shape of the tensors do not match. Let&rsquo;s fix the shape and see.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">t5 <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>normal(mean <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, std <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>, size <span style="color:#f92672">=</span> (<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>))<span style="color:#f92672">.</span>type(torch<span style="color:#f92672">.</span>int)
+
+t6 <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>normal(mean <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, std <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>, size <span style="color:#f92672">=</span> (<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>))<span style="color:#f92672">.</span>type(torch<span style="color:#f92672">.</span>int)
+
+<span style="color:#66d9ef">print</span>(t5)
+
+<span style="color:#66d9ef">print</span>(t6)
+
+
+torch<span style="color:#f92672">.</span>where((t5<span style="color:#f92672">==</span>t6), t5, t6)
+</code></pre></div><pre><code>t5 = torch.normal(mean = -1, std = 4, size = (3,2,1)).type(torch.int)
+
+t6 = torch.normal(mean = -1, std = 4, size = (3,2,1)).type(torch.int)
+
+print(t5)
+
+print(t6)
+
+
+torch.where((t5==t6), t5, t6)
+</code></pre><p>Now the output has got generated. By the way, what if the datatypes of the tensors differ?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">t7 <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>normal(mean <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, std <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>, size <span style="color:#f92672">=</span> (<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>))<span style="color:#f92672">.</span>type(torch<span style="color:#f92672">.</span>float)
+
+t8 <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>normal(mean <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, std <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>, size <span style="color:#f92672">=</span> (<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>))<span style="color:#f92672">.</span>type(torch<span style="color:#f92672">.</span>int)
+
+<span style="color:#66d9ef">print</span>(t7)
+
+<span style="color:#66d9ef">print</span>(t8)
+
+torch<span style="color:#f92672">.</span>where((torch<span style="color:#f92672">.</span>add(t7,t8)<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>), t7, t8)
+</code></pre></div><pre><code>tensor([[[-1.0568],
+         [-5.9925]],
+
+        [[-0.0270],
+         [-2.2952]],
+
+        [[ 6.6277],
+         [ 3.5775]]])
+tensor([[[-2],
+         [ 4]],
+
+        [[-2],
+         [-2]],
+
+        [[-1],
+         [ 0]]], dtype=torch.int32)
+---------------------------------------------------------------------------
+RuntimeError                              Traceback (most recent call last)
+&lt;ipython-input-90-498b50129220&gt; in &lt;module&gt;
+      7 print(t8)
+      8 
+----&gt; 9 torch.where((torch.add(t7,t8)==0), t7, t8)
+
+RuntimeError: expected scalar type float but found int
+</code></pre><p>Evidently, the function expects both the tensors to be of the same datatype. Let&rsquo;s fix and see.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">t7 <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>normal(mean <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, std <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>, size <span style="color:#f92672">=</span> (<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>))<span style="color:#f92672">.</span>type(torch<span style="color:#f92672">.</span>int)
+
+t8 <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>normal(mean <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, std <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>, size <span style="color:#f92672">=</span> (<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>))<span style="color:#f92672">.</span>type(torch<span style="color:#f92672">.</span>int)
+
+<span style="color:#66d9ef">print</span>(t7)
+
+<span style="color:#66d9ef">print</span>(t8)
+
+torch<span style="color:#f92672">.</span>where((torch<span style="color:#f92672">.</span>add(t7,t8)<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>), t7, t8)
+</code></pre></div><pre><code>tensor([[[ 2],
+         [ 0]],
+
+        [[-4],
+         [-2]],
+
+        [[-5],
+         [-5]]], dtype=torch.int32)
+tensor([[[ 1],
+         [-6]],
+
+        [[-4],
+         [ 2]],
+
+        [[ 1],
+         [ 0]]], dtype=torch.int32)
+tensor([[[ 1],
+         [-6]],
+
+        [[-4],
+         [-2]],
+
+        [[ 1],
+         [ 0]]], dtype=torch.int32)
+</code></pre><p>What if we want a constant as the output?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">t7 <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>normal(mean <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, std <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>, size <span style="color:#f92672">=</span> (<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>))<span style="color:#f92672">.</span>type(torch<span style="color:#f92672">.</span>int)
+
+t8 <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>normal(mean <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, std <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>, size <span style="color:#f92672">=</span> (<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>))<span style="color:#f92672">.</span>type(torch<span style="color:#f92672">.</span>int)
+
+<span style="color:#66d9ef">print</span>(t7)
+
+<span style="color:#66d9ef">print</span>(t8)
+
+torch<span style="color:#f92672">.</span>where((torch<span style="color:#f92672">.</span>add(t7,t8)<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>), <span style="color:#ae81ff">1</span>, t8)
+</code></pre></div><pre><code>tensor([[[  4],
+         [-10]],
+
+        [[  0],
+         [  1]],
+
+        [[ -3],
+         [ -5]]], dtype=torch.int32)
+tensor([[[ 1],
+         [ 1]],
+
+        [[ 2],
+         [ 4]],
+
+        [[-3],
+         [-3]]], dtype=torch.int32)
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+&lt;ipython-input-92-d8c185adde4d&gt; in &lt;module&gt;
+      7 print(t8)
+      8 
+----&gt; 9 torch.where((torch.add(t7,t8)==0), 1, t8)
+
+TypeError: where(): argument 'input' (position 2) must be Tensor, not int
+</code></pre><p>Unfortunately the function strictly outputs a tensor and doesn&rsquo;t accept constants.</p>
+<p>There you go! Key takeways about this torch.where() are</p>
+<ul>
+<li>
+<p>It requires tensors to be of same datatype and shape</p>
+</li>
+<li>
+<p>output needs to be tensor.</p>
+</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>Here we have have quickly seen some of the interesting functions in PyTorch. We&rsquo;ll continue applying these and in fact explore more of these in the next module.</p>
+<p>Catch you next week!</p>
+<h1 id="reference-links">Reference Links</h1>
+<p>Official documentation for torch.Tensor: <a href="https://pytorch.org/docs/stable/tensors.html">https://pytorch.org/docs/stable/tensors.html</a></p>
+
+
+</article>
+
+
+<section class="post-nav">
+    <ul>
+        
+        
+    </ul>
+</section>
+    
+    
+        <section class="comments-block">
+      <button id="show-comments" style="display: none;"><i class="fa fa-comments"></i> </button>
+</section>
+
+<section id="disqus_thread"></section>
+
+<script>
+      (function () {
+            
+            
+            if (window.location.hostname == "localhost")
+                  return;
+
+            var disqus_loaded = false;
+            var disqus_shortname = 'myShortName';
+            var disqus_button = document.getElementById("show-comments");
+
+            var disqus_autoload =  null ;
+            disqus_button.style.display = "";
+
+            if (disqus_autoload){
+                  disqus();
+            }else{
+                  disqus_button.addEventListener("click", disqus, false);
+            }
+
+            function disqus() {
+
+                  if (!disqus_loaded) {
+                        disqus_loaded = true;
+
+                        var e = document.createElement("script");
+                        e.type = "text/javascript";
+                        e.async = true;
+                        e.src = "//" + disqus_shortname + ".disqus.com/embed.js";
+                        (document.getElementsByTagName("head")[0] ||
+                              document.getElementsByTagName("body")[0])
+                        .appendChild(e);
+
+                        
+                        document.getElementById("show-comments").style.display = "none";
+                  }
+            }
+
+            
+            var hash = window.location.hash.substr(1);
+            if (hash.length > 8) {
+                  if (hash.substring(0, 8) == "comment-") {
+                        disqus();
+                  }
+            }
+
+            
+            if (/bot|google|baidu|bing|msn|duckduckgo|slurp|yandex/i.test(navigator.userAgent)) {
+                  disqus();
+            }
+      })();
+</script>
+
+    
+
+
+
+
+
+</main>
+    <footer>
+        <h6> |
+            Rendered by <a href="https://gohugo.io" title="Hugo">Hugo</a> |
+            <a href="http://localhost:1313/blogindex.xml">Subscribe </a></h6>
+    </footer>
+</div>
+<script src="../js/scripts.js"></script>
+
+</body>
+
+</html>
+
