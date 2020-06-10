@@ -9,6 +9,17 @@
    <lastBuildDate>Sat, 30 May 2020 21:27:44 -0700</lastBuildDate>
    
        <atom:link href="http://localhost:1313/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+          <item>
+       <title>How to start modelling in Pytorch</title>
+       <link>http://localhost:1313/blog/posts/day2.html</link>
+       <pubDate>Sun, 31 May 2020 12:41:10 -0700</pubDate>
+       
+       <guid>http://localhost:1313/blog/posts/day2.html</guid>
+       <description>&lt;p&gt;In the second part of this PyTorch series, we are interested in learning to model a deep learning image classification model from scratch for an interesting dataset. To check out more, please visit my Medium blog by clicking &lt;a href=&#34;https://medium.com/@connect.krithi/how-do-start-modelling-in-pytorch-361847ae1ff9&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+</description>
+     </item>
+   
    
    
      <item>
